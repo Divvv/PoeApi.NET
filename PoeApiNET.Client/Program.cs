@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using PoeApiNET.Library;
 using PoeApiNET.Library.Models;
-using static PoeApiNET.Library.PoeApiClient;
 
 namespace PoeApiNET.Client
 {
@@ -9,18 +9,39 @@ namespace PoeApiNET.Client
     {
         static void Main(string[] args)
         {
-            Del handler = DelegateMethod;
+            var worker = new Worker();
+
+            PoeApiClient.DelegateHandler handler = worker.DelegateMethod;
 
             var client = new PoeApiClient();
             // var stuff = client.GetLatestPublicStashTabs().Result;
 
             // client.GetLatestPublicStashTabsAndHandle(handler);
-            client.StartWatch(handler);
+            client.StartWatch(callback: handler);
         }
-        
-        public static void DelegateMethod(StashResponse stashResponse)
+    }
+
+    public class Worker
+    {
+        public void DelegateMethod(StashResponse stashResponse)
         {
-            Console.WriteLine("test: " + stashResponse.stashes[0].accountName);
+            Console.WriteLine("Fetched " + stashResponse.stashes.Count + " stashes.");
+            FindBobo(stashResponse);
+
+        }
+
+        private void FindBobo(StashResponse stashResponse)
+        {
+            var allAccounts = stashResponse.stashes.SelectMany(s => s.accountName).ToList();
+            var boboExists = allAccounts.Any(s => s.Equals("ldbob"));
+            if (boboExists)
+            {
+                Console.WriteLine("Found bobo!");
+            }
+            else
+            {
+                Console.WriteLine("No bobo ...");
+            }
         }
     }
 }

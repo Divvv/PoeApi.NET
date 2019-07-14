@@ -6,9 +6,9 @@ using PoeApiNET.Library.Models;
 
 namespace PoeApiNET.Library
 {
-    public class PoeApiClient
+    public class PoeApiClient : IPoeApiClient
     {
-        public delegate void Del(StashResponse stashResponse);
+        public delegate void DelegateHandler(StashResponse stashResponse);
 
         private const string ApiUrl = "http://www.pathofexile.com/api/public-stash-tabs?id=";
         private const string PoeWatchIdApiUrl = "https://api.poe.watch/id";
@@ -38,18 +38,19 @@ namespace PoeApiNET.Library
             return deserializedResponse;
         }
 
-        public void GetLatestPublicStashTabsAndHandle(Del callback)
+        public void GetLatestPublicStashTabsAndHandle(DelegateHandler callback)
         {
             var i = GetLatestPublicStashTabs();
             callback(i);
         }
 
-        public void StartWatch(Del callback)
+        public void StartWatch(DelegateHandler callback)
         {
             var a = GetLatestPublicStashTabs();
             callback(a);
             var next = a.next_change_id;
-            for(;;){
+            for (; ; )
+            {
                 var b = GetPublicStashTabs(next);
                 next = b.next_change_id;
                 callback(b);
