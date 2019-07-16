@@ -1,0 +1,9 @@
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\bin\Debug\netstandard2.0\PoeApiNET.Library.deps.json
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\bin\Debug\netstandard2.0\PoeApiNET.Library.dll
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\bin\Debug\netstandard2.0\PoeApiNET.Library.pdb
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\obj\Debug\netstandard2.0\PoeApiNET.Library.csproj.CoreCompileInputs.cache
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\obj\Debug\netstandard2.0\PoeApiNET.Library.AssemblyInfoInputs.cache
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\obj\Debug\netstandard2.0\PoeApiNET.Library.AssemblyInfo.cs
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\obj\Debug\netstandard2.0\PoeApiNET.Library.dll
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\obj\Debug\netstandard2.0\PoeApiNET.Library.pdb
+C:\Users\tempnikan\Desktop\PoeApi.NET\PoeApiNET.Library\obj\Debug\netstandard2.0\PoeApiNET.Library.csprojAssemblyReference.cache
