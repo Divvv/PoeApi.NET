@@ -27,20 +27,30 @@ namespace PoeApiNET.Client
         {
             Console.WriteLine("Fetched " + stashResponse.stashes.Count + " stashes.");
             FindBobo(stashResponse);
+            FindHeadhunter(stashResponse);
 
         }
 
         private void FindBobo(StashResponse stashResponse)
         {
-            var allAccounts = stashResponse.stashes.SelectMany(s => s.accountName).ToList();
+            var allAccounts = stashResponse.stashes.Where(s => s.accountName != null).Select(s => s.accountName).ToList();
             var boboExists = allAccounts.Any(s => s.Equals("ldbob"));
             if (boboExists)
             {
                 Console.WriteLine("Found bobo!");
             }
-            else
+        }
+
+        private void FindHeadhunter(StashResponse stashResponse)
+        {
+            var a = 
+                stashResponse.stashes
+                    .Where(s => s.items.Where(i => i.name.Equals("Headhunter")).Any())
+                    .ToList();
+            
+            foreach (var stash in a)
             {
-                Console.WriteLine("No bobo ...");
+                Console.WriteLine("Headhunter sold by " + stash.lastCharacterName);
             }
         }
     }

@@ -10,8 +10,20 @@ namespace PoeApiNET.Library
     {
         public delegate void DelegateHandler(StashResponse stashResponse);
 
-        private const string ApiUrl = "http://www.pathofexile.com/api/public-stash-tabs?id=";
-        private const string PoeWatchIdApiUrl = "https://api.poe.watch/id";
+        private string ApiUrl;
+        private string PoeWatchIdApiUrl;
+
+        public PoeApiClient()
+        {
+            ApiUrl = "http://www.pathofexile.com/api/public-stash-tabs?id=";
+            PoeWatchIdApiUrl = "https://api.poe.watch/id";
+        }
+
+        public PoeApiClient(string apiUrl, string poeWatchApiUrl)
+        {
+            ApiUrl = apiUrl;
+            PoeWatchIdApiUrl = poeWatchApiUrl;
+        }
 
         public string GetLatestChangeId()
         {
@@ -46,14 +58,14 @@ namespace PoeApiNET.Library
 
         public void StartWatch(DelegateHandler callback)
         {
-            var a = GetLatestPublicStashTabs();
-            callback(a);
-            var next = a.next_change_id;
+            var firstResponse = GetLatestPublicStashTabs();
+            callback(firstResponse);
+            var followingChanegeId = firstResponse.next_change_id;
             for (; ; )
             {
-                var b = GetPublicStashTabs(next);
-                next = b.next_change_id;
-                callback(b);
+                var followingResponse = GetPublicStashTabs(followingChanegeId);
+                followingChanegeId = followingResponse.next_change_id;
+                callback(followingResponse);
             }
         }
     }
